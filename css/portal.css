@@ -1,0 +1,75 @@
+:root {
+  font-family: Arial, sans-serif;
+  color: #172f43;
+  background: #f3f6fa;
+  line-height: 1.65;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+a { color: #075a96; text-underline-offset: .2em; }
+a:focus-visible { outline: 3px solid #a34a00; outline-offset: 4px; }
+.previewBanner {
+  padding: .8rem 1.5rem;
+  text-align: center;
+  background: #fff0cd;
+  color: #513900;
+}
+main { max-width: 1120px; margin: auto; padding: 3rem 1.5rem; }
+h1, h2, h3 { font-family: "Public Sans", Arial, sans-serif; line-height: 1.2; }
+h1 { font-size: clamp(2rem, 5vw, 3.25rem); color: #064774; margin-top: 0; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+.dLead { font-size: 1.15rem; max-width: 75ch; }
+.dHead { border-bottom: 4px solid #075a96; padding-bottom: 1.5rem; }
+.dMeta { display: flex; flex-wrap: wrap; gap: 1.5rem 4rem; }
+dt { font-weight: bold; }
+dd { margin: .25rem 0 0; }
+.dReq { margin: 2rem 0; }
+.dfBtn {
+  display: inline-block;
+  padding: .75rem 1.25rem;
+  border-radius: .4rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+.dfBtnMain { background: #075a96; color: white; }
+.useHint, .dfIntro, .dGlanceLead { max-width: 80ch; }
+.useHint { color: #46576a; }
+.useHintLbl { font-weight: bold; }
+.dashFigures, .srcCredits {
+  background: white;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  border: 1px solid #d6e0e9;
+  border-radius: .75rem;
+  margin-top: 2rem;
+}
+#dashFiguresBody {
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  background: #edf4fa;
+  border-left: 4px solid #075a96;
+}
+.dfCredit, .srcCite { border-top: 1px solid #d6e0e9; padding-top: 1.5rem; }
+.srcCredits dl > div { margin: 1.5rem 0; }
+.srcCredits a { overflow-wrap: anywhere; }
+.skipLink, .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.skipLink:focus {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: .75rem;
+  clip-path: none;
+  background: white;
+}
