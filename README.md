@@ -16,6 +16,7 @@ source identifies the site as awaiting leadership approval.
 The request form opens the user's email application; it does not send email
 directly. PDF exports use the browser's print-to-PDF function.
 
-The floating Graphs menu links to each generated figure, with a back-to-top
-control. Smooth scrolling and the header's parallax effect are disabled when
-the visitor requests reduced motion.
+The figure tabs below the hero and the floating Graphs menu link to each
+generated figure; the floating menu also offers a back-to-top control. Smooth
+scrolling and the header's parallax effect are disabled when the visitor
+requests reduced motion.

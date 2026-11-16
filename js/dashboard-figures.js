@@ -513,7 +513,7 @@
     const rows = [
       ["Dashboard title", esc("Recording Activity Dashboard")],
       ["Purpose", esc(glue("Home sales, home prices, and population change in Davidson County"))],
-      ["Designed and managed by", `<a href="https://victorialovefranklin.github.io/victoria-franklin-site/" target="_blank" rel="noopener">Victoria Love Franklin<span class="visually-hidden"> (opens in a new tab)</span></a>, Published Research Scholar, Data GIS Scientist, and&nbsp;Developer`],
+      ["Designed by", `<a href="https://victorialovefranklin.github.io/victoria-franklin-site/" target="_blank" rel="noopener">Victoria Love Franklin<span class="visually-hidden"> (opens in a new tab)</span></a>`],
       ["Data sources", esc(glue("Davidson County Register of Deeds (recorded deeds), Nashville Open Data (Metro parcel records), and the U.S. Census Bureau"))],
       ["Updated", esc(glue("Monthly, by the 10th"))],
       ["Data through", esc(glue(mlong(M.throughMonth || "")))],

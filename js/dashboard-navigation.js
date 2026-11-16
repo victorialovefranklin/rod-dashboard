@@ -6,9 +6,20 @@
     const panel = document.getElementById("graphNavPanel");
     const toggle = document.getElementById("graphNavToggle");
     const list = document.getElementById("graphNavList");
+    const tabs = document.getElementById("figureTabs");
+    const tabsList = document.getElementById("figureTabsList");
     const figures = document.querySelectorAll("#dashFiguresBody .dfFig");
-    if (!nav || !panel || !toggle || !list || !figures.length) return;
+    if (!nav || !panel || !toggle || !list || !tabs || !tabsList || !figures.length) return;
 
+    const tabLabels = {
+      "fig-homeSales": "Home sales",
+      "fig-homeMedian": "Home prices",
+      "fig-priceRanges": "Price ranges",
+      "fig-propertyTypes": "Property types",
+      "fig-zips": "ZIP codes",
+      "fig-marketTrends": "Market trends",
+      "fig-population": "Population"
+    };
     figures.forEach(figure => {
       const heading = figure.querySelector("h3");
       if (!figure.id || !heading) return;
@@ -19,9 +30,18 @@
       link.textContent = heading.textContent;
       item.append(link);
       list.append(item);
+
+      const tabItem = document.createElement("li");
+      const tab = document.createElement("a");
+      tab.href = link.href;
+      tab.textContent = tabLabels[figure.id] || heading.textContent;
+      tab.setAttribute("aria-label", heading.textContent);
+      tabItem.append(tab);
+      tabsList.append(tabItem);
     });
     if (!list.children.length) return;
     nav.hidden = false;
+    tabs.hidden = false;
 
     const setOpen = open => {
       panel.hidden = !open;

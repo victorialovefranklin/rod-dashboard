@@ -116,7 +116,7 @@
         ["Public data current through", longDate(mk.asOf)],
         ["Update frequency", "Monthly"],
         ["Data sources", "Nashville Open Data (Metro parcel records) and the U.S. Census Bureau"],
-        ["Designed and managed by", "Victoria Love Franklin, Published Research Scholar, Data GIS Scientist, and Developer"]
+        ["Designed by", "Victoria Love Franklin"]
       ];
       const note = "Source: Davidson County Register of Deeds recorded deeds (via Nashville Open Data, Metro parcel records) and the U.S. Census Bureau";
       /* ZIP-code sales (Metro public parcel records; matches the Open Data file transfers_by_zip_monthly) */
