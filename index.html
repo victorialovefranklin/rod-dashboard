@@ -16,18 +16,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/portal.css">
+    <link rel="stylesheet" href="css/dashboard-navigation.css">
   </head>
-  <body data-page="dashboard">
+  <body id="top" data-page="dashboard" tabindex="-1">
 <a class="skipLink" href="#mainContent">Skip to main content</a>
     <div class="previewBanner" id="previewBanner" role="region" aria-label="Preview notice"><strong>Preview for leadership review.</strong> This site has not yet been approved for public release.</div>
     <header class="v7Hero">
       <div class="heroArtwork" aria-label="Karen Johnson Register of Deeds Nashville header"></div>
       <span class="visually-hidden">Karen Johnson, Davidson County Register of Deeds, Nashville, Tennessee</span>
-      <div class="utilityLinks withDesigner" aria-label="Designer">
-        <a class="designerLink" href="https://victorialovefranklin.github.io/victoria-franklin-site/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="8" r="3.5"/>
-          <path d="M4.5 20c1.2-4 4.2-6 7.5-6s6.3 2 7.5 6"/></svg>About the Designer<span class="visually-hidden"> (opens in a new tab)</span></a>
-      </div>
     </header>
     <main id="mainContent" tabindex="-1">
       <div id="dashboardView" class="portalView active">
@@ -200,6 +196,16 @@
         </g></svg>
       </div>
     </footer>
+    <nav class="graphNav" id="graphNav" aria-label="Dashboard graph navigation" hidden>
+      <div class="graphNavPanel" id="graphNavPanel" hidden>
+        <p>Jump to a graph</p>
+        <ol id="graphNavList"></ol>
+      </div>
+      <div class="graphNavControls">
+        <button type="button" id="graphNavToggle" aria-expanded="false" aria-controls="graphNavPanel">Graphs</button>
+        <a href="#top" aria-label="Go back to top">Back to top ↑</a>
+      </div>
+    </nav>
 
 <script src="js/data/dashboard-data.js"></script>
 <script src="js/data/sales-data.js"></script>
@@ -207,5 +213,6 @@
 <script src="js/exports-and-tables.js"></script>
 <script src="js/dashboard-figures.js"></script>
 <script src="js/request-data.js"></script>
+<script src="js/dashboard-navigation.js"></script>
   </body>
 </html>
