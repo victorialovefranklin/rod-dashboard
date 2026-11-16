@@ -2,64 +2,8 @@
   "use strict";
 
   function init() {
-    const nav = document.getElementById("graphNav");
-    const panel = document.getElementById("graphNavPanel");
-    const toggle = document.getElementById("graphNavToggle");
-    const list = document.getElementById("graphNavList");
-    const tabs = document.getElementById("figureTabs");
-    const tabsList = document.getElementById("figureTabsList");
-    const figures = document.querySelectorAll("#dashFiguresBody .dfFig");
-    if (!nav || !panel || !toggle || !list || !tabs || !tabsList || !figures.length) return;
-
-    const tabLabels = {
-      "fig-homeSales": "Home sales",
-      "fig-homeMedian": "Home prices",
-      "fig-priceRanges": "Price ranges",
-      "fig-propertyTypes": "Property types",
-      "fig-zips": "ZIP codes",
-      "fig-marketTrends": "Market trends",
-      "fig-population": "Population"
-    };
-    figures.forEach(figure => {
-      const heading = figure.querySelector("h3");
-      if (!figure.id || !heading) return;
+    document.querySelectorAll("#dashFiguresBody .dfFig").forEach(figure => {
       figure.tabIndex = -1;
-      const item = document.createElement("li");
-      const link = document.createElement("a");
-      link.href = "#" + figure.id;
-      link.textContent = heading.textContent;
-      item.append(link);
-      list.append(item);
-
-      const tabItem = document.createElement("li");
-      const tab = document.createElement("a");
-      tab.href = link.href;
-      tab.textContent = tabLabels[figure.id] || heading.textContent;
-      tab.setAttribute("aria-label", heading.textContent);
-      tabItem.append(tab);
-      tabsList.append(tabItem);
-    });
-    if (!list.children.length) return;
-    nav.hidden = false;
-    tabs.hidden = false;
-
-    const setOpen = open => {
-      panel.hidden = !open;
-      toggle.setAttribute("aria-expanded", String(open));
-    };
-    toggle.addEventListener("click", () => setOpen(panel.hidden));
-    list.addEventListener("click", event => {
-      if (event.target.closest("a")) setOpen(false);
-    });
-    nav.querySelector('a[href="#top"]').addEventListener("click", () => setOpen(false));
-    document.addEventListener("click", event => {
-      if (!nav.contains(event.target)) setOpen(false);
-    });
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape" && !panel.hidden) {
-        setOpen(false);
-        toggle.focus();
-      }
     });
 
     const header = document.querySelector("#dashboardView .dHead");

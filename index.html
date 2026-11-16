@@ -25,8 +25,16 @@
       <div class="heroArtwork" aria-label="Karen Johnson Register of Deeds Nashville header"></div>
       <span class="visually-hidden">Karen Johnson, Davidson County Register of Deeds, Nashville, Tennessee</span>
     </header>
-    <nav class="figureTabs" id="figureTabs" aria-label="Jump to a figure" hidden>
-      <ul id="figureTabsList"></ul>
+    <nav class="figureTabs" aria-label="Jump to a figure">
+      <ul>
+        <li><a href="#fig-homeSales">Home sales</a></li>
+        <li><a href="#fig-homeMedian">Home prices</a></li>
+        <li><a href="#fig-priceRanges">Price ranges</a></li>
+        <li><a href="#fig-propertyTypes">Property types</a></li>
+        <li><a href="#fig-zips">ZIP codes</a></li>
+        <li><a href="#fig-marketTrends">Market trends</a></li>
+        <li><a href="#fig-population">Population</a></li>
+      </ul>
     </nav>
     <main id="mainContent" tabindex="-1">
       <div id="dashboardView" class="portalView active">
@@ -199,16 +207,7 @@
         </g></svg>
       </div>
     </footer>
-    <nav class="graphNav" id="graphNav" aria-label="Dashboard graph navigation" hidden>
-      <div class="graphNavPanel" id="graphNavPanel" hidden>
-        <p>Jump to a graph</p>
-        <ol id="graphNavList"></ol>
-      </div>
-      <div class="graphNavControls">
-        <button type="button" id="graphNavToggle" aria-expanded="false" aria-controls="graphNavPanel">Graphs</button>
-        <a href="#top" aria-label="Go back to top">Back to top ↑</a>
-      </div>
-    </nav>
+    <a class="backToTop" href="#top">Back to top ↑</a>
 
 <script src="js/data/dashboard-data.js"></script>
 <script src="js/data/sales-data.js"></script>
