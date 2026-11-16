@@ -10,6 +10,8 @@
         else tab.removeAttribute("aria-current");
       });
     };
+    const initialFigure = figures.find(figure => "#" + figure.id === window.location.hash) || figures[0];
+    if (initialFigure) setActiveFigure(initialFigure.id);
 
     figures.forEach(figure => {
       figure.tabIndex = -1;
