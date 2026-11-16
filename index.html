@@ -29,7 +29,7 @@
             <dl class="dMeta">
               <div>
                 <dt>Data as of</dt>
-                <dd id="asOf">Not available
+                <dd id="asOf">
                 </dd>
               </div>
               <div>
@@ -38,8 +38,8 @@
               </div>
             </dl>
           </header>
-          <div class="dReq"><a class="dfBtn dfBtnMain" href="mailto:rod.infodesk@nashville.gov?subject=Dashboard%20data%20request">Request data by email</a>
-            <p class="useHint">Contact the Register of Deeds to request data. The interactive request form requires the original JavaScript files, which are not included in this preview.</p>
+          <div class="dReq"><button type="button" class="dfBtn dfBtnMain" id="dReqBtn" aria-expanded="false" aria-controls="dReqPanel">Request data</button>
+            <p class="useHint"><span class="useHintLbl">How to use:</span> Select Request data to open the form. Check the data you need, add your contact information, then select Send request. Your email app opens with the request filled&nbsp;in.</p>
           </div>
           <section class="dReqPanel" id="dReqPanel" aria-labelledby="dReqH" hidden>
             <h2 id="dReqH">Request data from the Register of Deeds</h2>
@@ -139,8 +139,8 @@
             <p class="dGlanceLead">The latest number of homes sold and the typical home price in Davidson&nbsp;County.</p>
             <div class="dashGlance" id="dashGlance">
             </div>
-            <div id="dashFiguresBody" role="status">
-              <p><strong>Chart data is not available in this preview.</strong> The original dashboard scripts and datasets have not been supplied. Charts, tables, and downloads will be available after those files are added. No sample statistics are displayed.</p>
+            <noscript>JavaScript is required to display the dashboard figures and use the request form.</noscript>
+            <div id="dashFiguresBody">
             </div>
             <p class="dfCredit">Dashboard designed and managed by <a href="https://victorialovefranklin.github.io/victoria-franklin-site/" target="_blank" rel="noopener">Victoria Love Franklin<span class="visually-hidden"> (opens in a new tab)</span></a>, Published Research Scholar, Data GIS Scientist, and&nbsp;Developer</p>
           </section>
@@ -169,5 +169,11 @@
         </section>
       </div>
     </main>
+<script src="js/data/dashboard-data.js"></script>
+<script src="js/data/sales-data.js"></script>
+<script src="js/data-blocks.js"></script>
+<script src="js/exports-and-tables.js"></script>
+<script src="js/dashboard-figures.js"></script>
+<script src="js/request-data.js"></script>
   </body>
 </html>
