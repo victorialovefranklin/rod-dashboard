@@ -1,8 +1,9 @@
 # Recording Activity Dashboard
 
 Standalone dashboard extracted from the Davidson County Register of Deeds
-portal. It retains the original dashboard styles, figures, tables, exports,
-request form, and provided data; other portal pages are not included.
+portal. It retains the original branded header, footer, dashboard styles,
+figures, tables, exports, request form, and provided data. Portal navigation
+and other pages are not included.
 
 Open `index.html` in a browser or serve the repository as a static site. The
 data files are `js/data/dashboard-data.js` and `js/data/sales-data.js`.
