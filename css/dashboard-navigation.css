@@ -1,6 +1,10 @@
 .figureTabs {
   display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1144px;
   height: auto;
+  margin: 0 auto;
   padding: .5rem 1rem;
   overflow-x: auto;
   background: #00306c;
