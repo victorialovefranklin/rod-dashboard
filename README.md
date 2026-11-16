@@ -5,6 +5,8 @@ portal. It retains the original branded header, footer, dashboard styles,
 figures, tables, exports, request form, and provided data. Portal navigation
 and other pages are not included.
 
+**Live dashboard:** [https://victorialovefranklin.github.io/rod-dashboard/](https://victorialovefranklin.github.io/rod-dashboard/)
+
 Open `index.html` in a browser or serve the repository as a static site. The
 data files are `js/data/dashboard-data.js` and `js/data/sales-data.js`.
 The included source data was downloaded September 17, 2026; it is not
