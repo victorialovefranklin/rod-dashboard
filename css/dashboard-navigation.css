@@ -5,43 +5,43 @@
   max-width: 1144px;
   height: auto;
   margin: 0 auto;
-  padding: .5rem 1rem;
+  padding: 7px 10px 0;
   overflow-x: auto;
-  background: #00306c;
+  background: #fff;
+  border-bottom: 1px solid #c8dbea;
 }
 
 .figureTabs ul {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
   width: 100%;
   min-width: max-content;
-  max-width: 1240px;
-  gap: .4rem;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.figureTabs li {
-  flex: 1 0 auto;
-}
-
 .figureTabs a {
   display: block;
-  padding: .7rem .9rem;
-  border: 1px solid #6fa3d2;
-  border-radius: .25rem;
-  color: #fff;
-  background: #075a96;
-  font: 700 14px/1.3 Arial, sans-serif;
+  padding: 8px 12px;
+  border: 1px solid #c8dbea;
+  border-bottom: 0;
+  border-radius: 0;
+  color: #244f6b;
+  background: #f5f9fc;
+  font: 800 11px/1.3 Arial, sans-serif;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
 }
 
 .figureTabs a:hover,
-.figureTabs a:focus-visible {
-  color: #00306c;
-  background: #fff;
+.figureTabs a:focus-visible,
+.figureTabs a[aria-current="location"] {
+  color: #fff;
+  background: #0875bd;
+  border-color: #0875bd;
 }
 
 .figureTabs a:focus-visible,
@@ -71,6 +71,12 @@
 
 #dashFiguresBody .dfFig {
   scroll-margin-top: 1rem;
+}
+
+@media (max-width: 700px) {
+  .figureTabs ul {
+    grid-template-columns: repeat(7, minmax(110px, 1fr));
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

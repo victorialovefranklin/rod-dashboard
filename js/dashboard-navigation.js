@@ -2,9 +2,31 @@
   "use strict";
 
   function init() {
-    document.querySelectorAll("#dashFiguresBody .dfFig").forEach(figure => {
+    const figures = [...document.querySelectorAll("#dashFiguresBody .dfFig")];
+    const figureTabs = [...document.querySelectorAll(".figureTabs a")];
+    const setActiveFigure = id => {
+      figureTabs.forEach(tab => {
+        if (tab.hash === "#" + id) tab.setAttribute("aria-current", "location");
+        else tab.removeAttribute("aria-current");
+      });
+    };
+
+    figures.forEach(figure => {
       figure.tabIndex = -1;
     });
+    figureTabs.forEach(tab => {
+      tab.addEventListener("click", () => setActiveFigure(tab.hash.slice(1)));
+    });
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(entries => {
+        const visible = entries
+          .filter(entry => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible.length) setActiveFigure(visible[0].target.id);
+      }, { rootMargin: "-30% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] });
+      figures.forEach(figure => observer.observe(figure));
+    }
 
     const header = document.querySelector("#dashboardView .dHead");
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
