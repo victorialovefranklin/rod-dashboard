@@ -136,6 +136,11 @@
   const svg = (body, aria) => `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(aria || "")}" preserveAspectRatio="xMidYMid meet">${body}</svg>`;
   const legend = items => `<ul class="dfLegend">${items.map(i => `<li><span style="background:${i.color};${i.dash ? "height:3px;border-top:3px dashed " + i.color + ";background:none" : ""}"></span>${esc(i.name)}</li>`).join("")}</ul>`;
   const mavg = (v, k) => v.map((_, i) => i < k - 1 ? null : v.slice(i - k + 1, i + 1).reduce((s, x) => s + x, 0) / k);
+  const linearTrend = v => {
+    const n = v.length, mx = (n - 1) / 2, my = v.reduce((s, x) => s + x, 0) / n;
+    const slope = v.reduce((s, x, i) => s + (i - mx) * (x - my), 0) / (v.reduce((s, x, i) => s + (i - mx) ** 2, 0) || 1);
+    return v.map((_, i) => my + slope * (i - mx));
+  };
   const bizDays = key => {
     const [y, m] = key.split("-").map(Number);
     const H = new Set(["01-01", "07-04", "11-11", "12-25", "06-19"]);
@@ -381,11 +386,26 @@
           values: full.map(a => idx(a)[2]),
           color: C.gold,
           dots: true
+        }, {
+          values: linearTrend(full.map(a => idx(a)[0])),
+          color: C.navy,
+          dash: true,
+          width: 1.8
+        }, {
+          values: linearTrend(full.map(a => idx(a)[1])),
+          color: C.grey,
+          dash: true,
+          width: 1.8
+        }, {
+          values: linearTrend(full.map(a => idx(a)[2])),
+          color: C.gold,
+          dash: true,
+          width: 1.8
         }], {
           min: 40,
           max: 160,
           yf: v => Math.round(v),
-          aria: "Six-year index of home price, home sales, and share under $400,000"
+          aria: "Six-year index of home price, home sales, and share under $400,000, with a dashed trend line for each"
         }) + legend([{
           name: "Typical home price",
           color: C.navy
@@ -395,6 +415,10 @@
         }, {
           name: "Share under $400,000",
           color: C.gold
+        }, {
+          name: "Dashed lines show each trend",
+          color: C.slate,
+          dash: true
         }]),
         head: ["Year", "Typical home price (index)", "Homes sold (index)", "Share under $400,000 (index)"],
         rows: full.map(a => [a.year, ...idx(a).map(v => v.toFixed(0))]),
@@ -432,8 +456,12 @@
             values: Y.map(y => y.change),
             color: C.gold,
             dots: true,
-            dash: true,
             width: 3
+          }, {
+            values: linearTrend(Y.map(y => y.change)),
+            color: C.gold,
+            dash: true,
+            width: 1.8
           }], {
             min: Math.floor(lo / step) * step,
             max: Math.ceil(hi / step) * step,
@@ -450,6 +478,9 @@
             color: C.slate
           }, {
             name: "Total change",
+            color: C.gold
+          }, {
+            name: "Dashed gold line shows the total-change trend",
             color: C.gold,
             dash: true
           }]),
