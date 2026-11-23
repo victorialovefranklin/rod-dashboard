@@ -67,7 +67,6 @@
   document.addEventListener("DOMContentLoaded", () => {
     const D = window.ROD_DASHBOARD_DATA,
       official = D && D.status === "Official";
-    const note = "Source: Davidson County Register of Deeds recorded deeds (via Nashville Open Data) and the U.S. Census Bureau";
     /* Dashboard: clearer export label, print, and a link to what's real */
     const ex = $("#fExport");
     if (ex) {
@@ -158,7 +157,6 @@
         sel.addEventListener("change", () => {
           box.innerHTML = table("Property sales by ZIP code, " + monthYear(sel.value), zHead, zRowsFor(sel.value), false);
         });
-        box.after(btn("Download ZIP-code sales, all months (CSV)", () => save(csvOf([zHead, ...sMonths.flatMap(zRowsFor)], ["Source: Davidson County Register of Deeds recorded deeds (via Nashville Open Data, Parcels; most recent sale per parcel)", `Data as of ${S.asOf}`]), "register-of-deeds-zip-code-sales.csv")));
       }
       /* Figure and chart index: read from the figures themselves once they have rendered */
       const fHead = ["Figure", "Question / title", "What it shows", "Key takeaway", "Source"];
@@ -192,7 +190,6 @@
           if (last) last.nodeValue = last.nodeValue.replace(/\s+(\S+)\s*$/, " $1");
         };
         box.querySelectorAll("th, td, caption").forEach(glue);
-        box.after(btn("Download figure index (CSV)", () => save(csvOf([fHead, ...fRows], [note, `Data as of ${mk.asOf || ""}`]), "register-of-deeds-figure-index.csv")));
         return true;
       };
       if (!buildIndex()) {

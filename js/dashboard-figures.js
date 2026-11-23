@@ -1,5 +1,5 @@
 /* Register of Deeds portal: dashboard-figures.js */
-/* Public Dashboard figures: plain-language questions, trend lines, tables, CSV and PDF (print) export.
+/* Public Dashboard figures: plain-language questions, trend lines, tables, and PDF (print) export.
    Reads window.ROD_DASHBOARD_DATA (market figures from Nashville Open Data). */
 (() => {
   "use strict";
@@ -485,7 +485,6 @@
     }
     return F;
   }
-  const csvOf = f => [f.head, ...f.rows].map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
 
   function render() {
     const D = window.ROD_DASHBOARD_DATA,
@@ -502,7 +501,7 @@
       ${f.compare ? `<aside class="dfCompare" aria-label="Wake County comparison"><h4>${esc(f.compare.title)}</h4><p>${esc(f.compare.text)}</p><p class="pNote">${esc(f.compare.source)}</p></aside>` : ""}
       <details class="dfTable"><summary>Show the table</summary><div class="tw"><table><thead><tr>${f.head.map(h => `<th scope="col">${esc(h)}</th>`).join("")}</tr></thead><tbody>${f.rows.map(r => `<tr>${r.map((c, i) => i ? `<td>${esc(c)}</td>` : `<th scope="row">${esc(c)}</th>`).join("")}</tr>`).join("")}</tbody></table></div></details>
       <details class="dfMethod"><summary>How we measure this</summary><p>${esc(f.method)}</p><p><strong>Source:</strong> ${esc(f.source)}</p>${(() => { const p = PV[PROV[f.id]]; return p ? `<p><strong>How this data is loaded:</strong> ${esc(p[2])}</p>` : ""; })()}</details>
-      <div class="dfActions"><button type="button" class="dfBtn" data-csv="${f.id}">Download CSV</button><button type="button" class="dfBtn" data-pdf="${f.id}">Download PDF report</button></div></article>`).join("");
+      <div class="dfActions"><button type="button" class="dfBtn" data-pdf="${f.id}">Download PDF report</button></div></article>`).join("");
     host._figs = F;
     const t = document.getElementById("dashGlance");
     if (t) t.innerHTML = glance(D, F);
@@ -564,22 +563,8 @@
   document.addEventListener("click", e => {
     const host = document.getElementById("dashFiguresBody");
     if (!host) return;
-    const c = e.target.closest("[data-csv]"),
-      p = e.target.closest("[data-pdf]"),
+    const p = e.target.closest("[data-pdf]"),
       r = e.target.closest("#dashReportBtn");
-    if (c) {
-      const f = host._figs.find(x => x.id === c.dataset.csv);
-      try {
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(new Blob([csvOf(f)], {
-          type: "text/csv"
-        }));
-        a.download = "davidson-" + f.id + ".csv";
-        document.body.append(a);
-        a.click();
-        a.remove();
-      } catch (err) {}
-    }
     if (p) printSet([p.dataset.pdf], "Davidson County Register of Deeds: Dashboard figure");
     if (r) printSet(["homeSales", "homeMedian", "priceRanges"], "Monthly Home Sales Report");
   });
