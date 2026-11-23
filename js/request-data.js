@@ -1,29 +1,10 @@
 /* Register of Deeds portal: request-data.js */
-/* Request data: a form on the Dashboard that builds an email request to the Register of Deeds */
+/* Request data: a standalone page with a form that builds an email request to the Register of Deeds */
 (() => {
   "use strict";
   const TO = "rod.infodesk@nashville.gov";
-  const btn = document.getElementById("dReqBtn"),
-    panel = document.getElementById("dReqPanel"),
-    form = document.getElementById("dReqForm");
-  if (!btn || !panel || !form) return;
-  const open = show => {
-    panel.hidden = !show;
-    btn.setAttribute("aria-expanded", String(show));
-    if (show) {
-      const h = document.getElementById("dReqH");
-      if (h) {
-        h.setAttribute("tabindex", "-1");
-        h.focus();
-      }
-    }
-  };
-  btn.addEventListener("click", () => open(panel.hidden));
-  const close = document.getElementById("dReqClose");
-  if (close) close.addEventListener("click", () => {
-    open(false);
-    btn.focus();
-  });
+  const form = document.getElementById("dReqForm");
+  if (!form) return;
   const val = n => {
     const el = form.elements[n];
     return el ? String(el.value || "").trim() : "";

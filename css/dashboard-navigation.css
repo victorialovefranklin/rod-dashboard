@@ -111,3 +111,19 @@
 #dashboardView .dfCompare p {
   margin: 0 0 4px;
 }
+#dashboardView .daInfoList {
+  margin: 0 0 16px;
+  display: grid;
+  gap: 8px;
+}
+#dashboardView .daInfoList div {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) 1fr;
+  gap: 12px;
+}
+#dashboardView .daInfoList dt {
+  font-weight: 700;
+}
+#dashboardView .daInfoList dd {
+  margin: 0;
+}

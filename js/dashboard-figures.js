@@ -499,7 +499,6 @@
       <h3 id="figq-${f.id}">${esc(f.q)}</h3><p class="dfShows"><strong>What this shows:</strong> ${esc(f.shows)}</p><div class="dfChart">${f.chart}</div>
       <p class="dfMeans"><strong>What it means:</strong> ${esc(f.means)}</p>
       ${f.compare ? `<aside class="dfCompare" aria-label="Wake County comparison"><h4>${esc(f.compare.title)}</h4><p>${esc(f.compare.text)}</p><p class="pNote">${esc(f.compare.source)}</p></aside>` : ""}
-      <details class="dfTable"><summary>Show the table</summary><div class="tw"><table><thead><tr>${f.head.map(h => `<th scope="col">${esc(h)}</th>`).join("")}</tr></thead><tbody>${f.rows.map(r => `<tr>${r.map((c, i) => i ? `<td>${esc(c)}</td>` : `<th scope="row">${esc(c)}</th>`).join("")}</tr>`).join("")}</tbody></table></div></details>
       <details class="dfMethod"><summary>How we measure this</summary><p>${esc(f.method)}</p><p><strong>Source:</strong> ${esc(f.source)}</p>${(() => { const p = PV[PROV[f.id]]; return p ? `<p><strong>How this data is loaded:</strong> ${esc(p[2])}</p>` : ""; })()}</details>
       <div class="dfActions"><button type="button" class="dfBtn" data-pdf="${f.id}">Download PDF report</button></div></article>`).join("");
     host._figs = F;
@@ -541,7 +540,7 @@
     ];
     if (c) rows.push(["Community size", `${fmt(c.population)} residents (Census estimate, ${esc(glue(c.asOf))})`]);
     return `<h3 id="dFr-info">Dashboard information</h3>
-      <div class="pTableWrap"><table class="pTable daInfo"><caption>About this dashboard</caption><thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody>${rows.map(r => `<tr><th scope="row">${esc(r[0])}</th><td>${r[1]}</td></tr>`).join("")}</tbody></table></div>`;
+      <dl class="daInfoList">${rows.map(r => `<div><dt>${esc(r[0])}</dt><dd>${r[1]}</dd></div>`).join("")}</dl>`;
   }
 
   function printSet(ids, title) {

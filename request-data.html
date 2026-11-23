@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Request data · Davidson County Register of Deeds</title>
+    <meta name="description" content="Request data from the Davidson County Register of Deeds by email.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Ccircle cx='90' cy='90' r='80' fill='%23075A96'/%3E%3Cg fill='%23fff'%3E%3Cpath d='M90 34l7.2 14.6 16.1 2.3-11.6 11.3 2.7 16-14.4-7.6-14.4 7.6 2.7-16-11.6-11.3 16.1-2.3z'/%3E%3Cpath d='M55 92l7.2 14.6 16.1 2.3-11.6 11.3 2.7 16-14.4-7.6-14.4 7.6 2.7-16-11.6-11.3 16.1-2.3z'/%3E%3Cpath d='M125 92l7.2 14.6 16.1 2.3-11.6 11.3 2.7 16-14.4-7.6-14.4 7.6 2.7-16-11.6-11.3 16.1-2.3z'/%3E%3C/g%3E%3C/svg%3E">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' data: https://fonts.gstatic.com; media-src 'self' data:; connect-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self' mailto:">
+    <meta name="robots" content="noindex, nofollow" id="previewNoIndex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/portal.css">
+    <link rel="stylesheet" href="css/dashboard-navigation.css?v=5">
+  </head>
+  <body id="top" data-page="request" tabindex="-1">
+<a class="skipLink" href="#mainContent">Skip to main content</a>
+    <div class="previewBanner" id="previewBanner" role="region" aria-label="Preview notice"><strong>Preview for leadership review.</strong> This site has not yet been approved for public release.</div>
+    <header class="v7Hero">
+      <div class="heroArtwork" aria-label="Karen Johnson Register of Deeds Nashville header"></div>
+      <span class="visually-hidden">Karen Johnson, Davidson County Register of Deeds, Nashville, Tennessee</span>
+    </header>
+    <main id="mainContent" tabindex="-1">
+      <div id="dashboardView" class="portalView active">
+        <section class="dReqPage" aria-labelledby="dReqH">
+          <p class="dReqBack"><a href="index.html">← Back to the Recording Activity Dashboard</a></p>
+          <section class="dReqPanel" aria-labelledby="dReqH">
+            <h1 id="dReqH">Request data from the Register of Deeds</h1>
+            <p>Choose the data you need from the figures on the dashboard, or describe any other data you're looking for. When you select Send request, your email opens with your request filled in and addressed to the Register of Deeds. The office reviews each request and sends you an itemized estimate before any work begins.</p>
+            <p class="useHint"><span class="useHintLbl">How to use:</span> Check the data you need, add your contact information, then select Send request. Your email app opens with the request filled&nbsp;in.</p>
+            <form id="dReqForm" novalidate>
+              <fieldset>
+                <legend>Step 1. Choose your data</legend>
+                <div class="dReqGroups">
+                  <div>
+                    <h3>Home sales and prices</h3>
+                    <label><input type="checkbox" name="data" value="Homes sold each month"> Homes sold each month</label>
+                    <label><input type="checkbox" name="data" value="Typical (median) home price by year"> Typical (median) home price by year</label>
+                    <label><input type="checkbox" name="data" value="Home sales by price range"> Home sales by price range</label>
+                    <label><input type="checkbox" name="data" value="Property sales by type"> Property sales by type</label>
+                    <label><input type="checkbox" name="data" value="Six-year market trends"> Six-year market trends</label>
+                  </div>
+                  <div>
+                    <h3>ZIP code data</h3>
+                    <label><input type="checkbox" name="data" value="Top ZIP codes for home sales"> Top ZIP codes for home sales</label>
+                    <label><input type="checkbox" name="data" value="Property sales by ZIP code and month"> Property sales by ZIP code and month</label>
+                    <label><input type="checkbox" name="data" value="ZIP code property summary"> ZIP code property summary</label>
+                    <label><input type="checkbox" name="data" value="Sales by property type and ZIP code"> Sales by property type and ZIP code</label>
+                  </div>
+                  <div>
+                    <h3>Population</h3>
+                    <label><input type="checkbox" name="data" value="Population change: births, deaths, and migration"> Population change: births, deaths, and migration</label>
+                  </div>
+                  <div>
+                    <h3>Fees and reference</h3>
+                    <label><input type="checkbox" name="data" value="Recording fee schedule"> Recording fee schedule</label>
+                    <label><input type="checkbox" name="data" value="Davidson County ZIP codes"> Davidson County ZIP codes</label>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>Step 2. Tell us the details</legend>
+                <div class="dReqRow"><span class="dReqLbl">Time period</span>
+                  <label><input type="radio" name="period" value="latest" checked> Latest available</label>
+                  <label><input type="radio" name="period" value="range"> From</label> <input type="month" name="from" aria-label="From month" disabled> <label for="dReqTo">to</label> <input type="month" id="dReqTo" name="to" aria-label="To month" disabled>
+                </div>
+                <div class="dReqRow"><span class="dReqLbl">ZIP codes</span>
+                  <label><input type="radio" name="zipScope" value="all" checked> All ZIP codes</label>
+                  <label><input type="radio" name="zipScope" value="list"> These ZIP codes:</label> <input type="text" name="zipList" aria-label="ZIP codes" placeholder="37203, 37211" disabled>
+                </div>
+                <div class="dReqRow"><span class="dReqLbl">Format</span>
+                  <label><input type="radio" name="format" value="CSV" checked> CSV</label><label><input type="radio" name="format" value="Excel"> Excel</label><label><input type="radio" name="format" value="PDF"> PDF</label>
+                </div>
+                <div class="dReqRow"><span class="dReqLbl">Delivery</span>
+                  <label><input type="radio" name="delivery" value="Secure download link (emailed to you)" checked> Secure download link (emailed to you)</label><label><input type="radio" name="delivery" value="Flash drive (at cost)"> Flash drive (at cost)</label><label><input type="radio" name="delivery" value="Pick up at the office"> Pick up at the office</label>
+                </div>
+                <label for="dReqPurpose" class="dReqUseLbl">How will you use the data? (required)</label>
+                <textarea id="dReqPurpose" name="purpose" rows="3" required></textarea>
+              </fieldset>
+              <fieldset>
+                <legend>Step 3. Other data request</legend>
+                <label for="dReqOther">Looking for something not listed? Describe the data, the time period, and how you plan to use it.</label>
+                <textarea id="dReqOther" name="other" rows="4"></textarea>
+                <p class="pNote">For a copy of a specific deed or recorded document, use <a href="https://www.nashville.gov/departments/register-deeds/services/get-copies-deeds-documents" target="_blank" rel="noopener">Get Copies of Deeds Documents<span class="visually-hidden"> (opens in a new tab)</span></a> instead.</p>
+              </fieldset>
+              <fieldset>
+                <legend>Step 4. Your contact information</legend>
+                <div class="dReqFields">
+                  <label>Full name (required)<input type="text" name="name" autocomplete="name" required></label>
+                  <label>Organization (optional)<input type="text" name="org" autocomplete="organization"></label>
+                  <label>Email (required)<input type="email" name="email" autocomplete="email" required></label>
+                  <label>Phone (required)<input type="tel" name="phone" autocomplete="tel" required></label>
+                  <label class="dReqWide">Mailing address (required, for the office's written response)<input type="text" name="address" autocomplete="street-address" required></label>
+                  <div class="dReqWide dReqRecip"><span class="dReqLbl">Who will receive the data? (required)</span>
+                    <label><input type="radio" name="recipScope" value="me" checked> Me</label>
+                    <label><input type="radio" name="recipScope" value="other"> Someone else:</label> <input type="text" name="recipient" aria-label="Recipient name and organization" placeholder="Name and organization" disabled>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="dReqFee">
+                <h3>Processing fee</h3>
+                <p>A processing fee may apply. Requests that take more than one hour of staff time to locate, retrieve, review, redact, or reproduce are charged for labor. Copies are $0.50 per page ($1.00 certified); plat-size copies are $3.00 ($5.00 certified). There is no duplication charge for requests under 5 black-and-white pages. Flash drives and outside vendor work are charged at actual cost. You'll receive an itemized estimate before any work begins, and payment is due in advance by cash, personal check payable to Davidson County Register of Deeds, money order, or credit or debit card. Copy requests require proof of Tennessee citizenship, such as a valid Tennessee driver's license.</p>
+                <label class="dReqAck"><input type="checkbox" name="fee" required> I understand a processing fee may apply and that I'll receive an estimate first. (required)</label>
+              </div>
+              <div class="dReqActions"><button type="submit" class="dfBtn dfBtnMain">Send request</button></div>
+              <p class="pNote">Sending opens your email app. If it doesn't open, email the request to <a href="mailto:rod.infodesk@nashville.gov">rod.infodesk@nashville.gov</a>.</p>
+              <div class="dReqMsg" id="dReqMsg" tabindex="-1" role="status" aria-live="polite"></div>
+            </form>
+            <div class="dReqContact">
+              <h3>Questions?</h3>
+              <p>Public Records Request Coordinator: Jack Brown, Chief Deputy Register<br>Davidson County Register of Deeds, 300 Deaderick Street, Nashville, TN 37201<br>Phone: <a href="tel:+16158626790">(615) 862-6790</a> · Email: <a href="mailto:rod.infodesk@nashville.gov">rod.infodesk@nashville.gov</a><br>Hours: Monday–Friday, 8:00 a.m.–4:30 p.m.; closed Saturday, Sunday, and county holidays</p>
+            </div>
+          </section>
+        </section>
+      </div>
+    </main>
+    <footer class="siteFooter">
+      <div class="footContact" aria-label="Office contact">
+        <div><strong>Davidson County Register of Deeds</strong><span>300 Deaderick Street<br>Nashville, Tennessee 37201</span>
+        </div>
+        <div><strong>Phone</strong><span><a href="tel:+16158626790">615-862-6790</a></span>
+        </div>
+        <div><strong>Office Hours</strong><span>Monday–Friday<br>8:00 AM–4:30 PM</span>
+        </div>
+        <div><strong>Mailing Address</strong><span>P.O. Box 196398<br>Nashville, TN 37219-6398</span>
+        </div>
+      </div>
+      <p class="designerCredit"><a href="https://victorialovefranklin.github.io/victoria-franklin-site/" target="_blank" rel="noopener"><span class="dcLabel">Designed by</span> <span class="dcName">Victoria Love Franklin</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+      </p>
+    </footer>
+    <a class="backToTop" href="#top">Back to top ↑</a>
+
+<script src="js/request-data.js?v=2"></script>
+  </body>
+</html>
