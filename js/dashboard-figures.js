@@ -258,6 +258,11 @@
           color: C.gold,
           dash: true
         }]),
+        compare: {
+          title: "Median value is increasing more rapidly than the number of properties transferred",
+          text: "Wake County, 2014 to 2019: the median sales price rose from $223,000 to $303,000, a 6.3% compound annual growth rate. Over the same period, deed transfers grew 2.9% a year.",
+          source: "Wake County Register of Deeds (Charles Gilliam), comparison slide. Wake County figures, not Davidson County."
+        },
         head: ["Year", "Median home price", "Change from prior year", "Homes sold"],
         rows: A.map((a, i) => [a.year + (a.months < 12 ? " (to date)" : ""), usd(a.homeMedian), growth[i] == null ? "" : pct(growth[i], 1), fmt(a.homeSales)]),
         method: `Median of home sales of $10,000 or more. Annual growth = this year's median \u00f7 last year's median \u2212 1. Average yearly growth (${f0.year}\u2013${fl.year}) = (${fl.year} median \u00f7 ${f0.year} median)^(1 \u00f7 ${fl.year - f0.year}) \u2212 1.`,
@@ -479,6 +484,7 @@
     host.innerHTML = F.map((f, n) => `<article class="dfFig" id="fig-${f.id}" aria-labelledby="figq-${f.id}"><div class="dfHead"><span class="dfNum">Figure ${n + 1}</span>${(() => { const p = PV[PROV[f.id]]; return p ? `<span class="dfSource dfSrc-${p[0]}">${esc(p[1])}</span>` : ""; })()}</div>
       <h3 id="figq-${f.id}">${esc(f.q)}</h3><p class="dfShows"><strong>What this shows:</strong> ${esc(f.shows)}</p><div class="dfChart">${f.chart}</div>
       <p class="dfMeans"><strong>What it means:</strong> ${esc(f.means)}</p>
+      ${f.compare ? `<aside class="dfCompare" aria-label="Wake County comparison"><h4>${esc(f.compare.title)}</h4><p>${esc(f.compare.text)}</p><p class="pNote">${esc(f.compare.source)}</p></aside>` : ""}
       <details class="dfTable"><summary>Show the table</summary><div class="tw"><table><thead><tr>${f.head.map(h => `<th scope="col">${esc(h)}</th>`).join("")}</tr></thead><tbody>${f.rows.map(r => `<tr>${r.map((c, i) => i ? `<td>${esc(c)}</td>` : `<th scope="row">${esc(c)}</th>`).join("")}</tr>`).join("")}</tbody></table></div></details>
       <details class="dfMethod"><summary>How we measure this</summary><p>${esc(f.method)}</p><p><strong>Source:</strong> ${esc(f.source)}</p>${(() => { const p = PV[PROV[f.id]]; return p ? `<p><strong>How this data is loaded:</strong> ${esc(p[2])}</p>` : ""; })()}</details>
       <div class="dfActions"><button type="button" class="dfBtn" data-csv="${f.id}">Download CSV</button><button type="button" class="dfBtn" data-pdf="${f.id}">Download PDF report</button></div></article>`).join("");

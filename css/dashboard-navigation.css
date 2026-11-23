@@ -97,3 +97,17 @@
     display: none !important;
   }
 }
+
+#dashboardView .dfCompare {
+  margin: 14px 0 0;
+  padding: 12px 16px;
+  border: 2px solid #111;
+  background: #fff;
+}
+#dashboardView .dfCompare h4 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+#dashboardView .dfCompare p {
+  margin: 0 0 4px;
+}
