@@ -17443,6 +17443,10 @@ html body :is(#servicesView, #recordsView):is(#servicesView, #recordsView) .rodP
     page-break-after: always
   }
 
+  body.printFigures .printHide {
+    display: none !important
+  }
+
   body.printFigures .dfActions,
   body.printFigures .dfFig summary {
     display: none !important

@@ -342,7 +342,8 @@
         });
       }
       if (M.zips && M.zips.length) {
-        const ZN = D.zipNames || {},
+        const zipTotal = M.zips.reduce((s, r) => s + r[1], 0) || 1,
+          ZN = D.zipNames || {},
           top = M.zips.slice(0, 10),
           zl = z => z + (ZN[z] ? " " + ZN[z] : "");
         F.push({
@@ -352,7 +353,7 @@
           shows: `The ten ZIP codes with the most home sales in the last 12 months (${mlong(M.zipPeriod[0])} to ${mlong(((m) => { const y = +m.slice(0, 4), mo = +m.slice(5); return mo === 1 ? (y - 1) + "-12" : y + "-" + String(mo - 1).padStart(2, "0"); })(M.zipPeriod[1]))}), with each ZIP's median home price.`,
           means: `${zl(top[0][0])} had the most home sales, ${fmt(top[0][1])}, at a median of ${usd(top[0][2])}. The GIS Map shows every ZIP code in the county. It counts the 12 months up to its download date${window.ROD_GIS_DATA && window.ROD_GIS_DATA.windowStart ? " (" + new Date(window.ROD_GIS_DATA.windowStart + "T12:00:00").toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"}) + " to " + new Date(window.ROD_GIS_DATA.asOf + "T12:00:00").toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"}) + ")" : ""} instead of whole months, so its ZIP counts can differ slightly from these.`,
           chart: hbars(top.map(r => zl(r[0])), top.map(r => r[1]), {
-            fmtv: (v, i) => fmt(v) + " sales \u00b7 " + usdK(top[i][2]) + " median",
+            fmtv: (v, i) => fmt(v) + " sales (" + pctp(v / zipTotal * 100) + ") \u00b7 " + usdK(top[i][2]) + " median",
             aria: "Top ten ZIP codes by home sales in the last 12 months"
           }) + `<p class="dfFoot"><a href="#gis" data-tab-link="gis">Explore every ZIP code on the GIS Map \u2192</a></p>`,
           head: ["ZIP code", "Home sales (last 12 months)", "Median home price"],
@@ -368,7 +369,7 @@
         q: "How has the housing market changed over six years?",
         status: "open",
         shows: `Three measures, each set to 100 in ${base.year}, so they can be compared on one chart. Above 100 means higher than ${base.year}.`,
-        means: `Compared with ${base.year}, the typical home price in ${fl.year} was ${cmp(idx(fl)[0] - 100, "higher", "lower")}, and the share of homes selling for under $400,000 was ${cmp(idx(fl)[2] - 100, "higher", "lower")}. Recorded home sales were ${cmp(idx(fl)[1] - 100, "higher", "lower")} (earlier years undercount; see how we measure this).`,
+        means: `Compared with ${base.year}, the typical home price in ${fl.year} was ${usd(fl.homeMedian)}, ${cmp(idx(fl)[0] - 100, "higher", "lower")}, and the share of homes selling for under $400,000 was ${cmp(idx(fl)[2] - 100, "higher", "lower")}. Recorded home sales were ${cmp(idx(fl)[1] - 100, "higher", "lower")} (earlier years undercount; see how we measure this).`,
         chart: line(full.map(a => String(a.year)), [{
           values: full.map(a => idx(a)[0]),
           color: C.navy,
@@ -494,7 +495,7 @@
           means: `Davidson County grew by about ${fmt(P.total)} people from ${P.period.replace(" to ", " to ")}: ${fmt(P.naturalIncrease)} more births than deaths, and ${fmt(P.international)} more people arriving from other countries, while about ${fmt(-P.domestic)} more people moved to other U.S. counties than came from them.${(() => { const s = P.naturalIncrease + P.international + P.domestic, r = P.total - s; return r ? ` These parts add up to ${fmt(s)}; the Census Bureau total of ${fmt(P.total)} also includes a small residual (${r > 0 ? "+" : ""}${fmt(r)}) that it does not assign to births, deaths, or migration.` : ""; })()} More residents means more demand for homes, one of several things that affect prices. This chart does not show that one causes the other.`,
           chart: bars(["Births minus deaths", "From other countries", "To and from other U.S. counties", "Total change"], [P.naturalIncrease, P.international, Math.abs(P.domestic), P.total], {
             colors: [C.blue, C.navy, C.grey, C.gold],
-            top: (v, i) => (i === 2 ? "\u2212" : "+") + fmt(v),
+            top: (v, i) => (i === 2 ? "\u2212" : "+") + fmt(v) + (i === 3 && M.community ? " (" + pctp(v / (M.community.population - v) * 100, 1) + ")" : ""),
             aria: "Components of population change, July 2024 to July 2025"
           }) + `<p class="dfFoot">The gray bar is a loss (more people moved out than in).</p>`,
           head: ["Component", "People"],
@@ -568,9 +569,23 @@
       <dl class="daInfoList">${rows.map(r => `<div><dt>${esc(r[0])}</dt><dd>${r[1]}</dd></div>`).join("")}</dl>`;
   }
 
+  /* Print only the chosen figure: hide everything outside its ancestors and itself, so no blank page space is printed */
   function printSet(ids, title) {
     document.body.dataset.printTitle = title || "";
-    document.querySelectorAll(".dfFig").forEach(f => f.classList.toggle("dfPrint", ids.includes(f.id.slice(4))));
+    const figs = ids.map(id => document.getElementById("fig-" + id)).filter(Boolean);
+    document.querySelectorAll(".dfFig").forEach(f => f.classList.toggle("dfPrint", figs.includes(f)));
+    const keep = new Set();
+    figs.forEach(f => {
+      keep.add(f);
+      f.querySelectorAll("*").forEach(e => keep.add(e));
+      for (let p = f.parentElement; p; p = p.parentElement) keep.add(p);
+    });
+    const hidden = [];
+    const walk = el => [...el.children].forEach(c => {
+      if (keep.has(c)) walk(c);
+      else { c.classList.add("printHide"); hidden.push(c); }
+    });
+    walk(document.body);
     document.querySelectorAll(".dfFig.dfPrint details").forEach(d => {
       d.dataset.was = d.open;
       d.open = true;
@@ -578,6 +593,7 @@
     document.body.classList.add("printFigures");
     window.print();
     setTimeout(() => {
+      hidden.forEach(c => c.classList.remove("printHide"));
       document.body.classList.remove("printFigures");
       document.querySelectorAll(".dfFig details").forEach(d => {
         if (d.dataset.was === "false") d.open = false;
@@ -587,10 +603,8 @@
   document.addEventListener("click", e => {
     const host = document.getElementById("dashFiguresBody");
     if (!host) return;
-    const p = e.target.closest("[data-pdf]"),
-      r = e.target.closest("#dashReportBtn");
+    const p = e.target.closest("[data-pdf]");
     if (p) printSet([p.dataset.pdf], "Davidson County Register of Deeds: Dashboard figure");
-    if (r) printSet(["homeSales", "homeMedian", "priceRanges"], "Monthly Home Sales Report");
   });
   window.RodFigures = {
     render
