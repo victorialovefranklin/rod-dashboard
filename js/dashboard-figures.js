@@ -127,6 +127,10 @@
       });
       out += `<text x="${cx(i)}" y="${H - 16}" text-anchor="middle" font-size="12" fill="${C.slate}">${esc(l)}</text>`;
     });
+    if (o.trend) {
+      const pts = o.trend.map((v, i) => [cx(i), a.y(v)]);
+      out += `<path d="${pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1)).join("")}" fill="none" stroke="${C.gold}" stroke-width="2.6" stroke-dasharray="7 5"/>`;
+    }
     return svg(out, o.aria);
   }
   const svg = (body, aria) => `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(aria || "")}" preserveAspectRatio="xMidYMid meet">${body}</svg>`;
@@ -303,11 +307,17 @@
           BT = M.byType,
           lt = BT.filter(b => (A.find(a => a.year === b.year) || {}).months === 12).pop() || BT[BT.length - 1];
         const tot = b => b.counts.reduce((x, y) => x + y, 0);
+        const homeShare = BT.map(b => b.counts[0] / tot(b) * 100),
+          n0 = homeShare.length,
+          mx = (n0 - 1) / 2,
+          my = homeShare.reduce((s, v) => s + v, 0) / n0,
+          slope = homeShare.reduce((s, v, i) => s + (i - mx) * (v - my), 0) / (homeShare.reduce((s, v, i) => s + (i - mx) ** 2, 0) || 1),
+          homeTrend = homeShare.map((v, i) => my + slope * (i - mx));
         F.push({
           id: "propertyTypes",
           q: "What kinds of property are selling?",
           status: "open",
-          shows: "Each bar is one year of property sales, divided by type: homes, apartments, commercial, land, other, and parcels not yet classified. The types add up to 100%.",
+          shows: "Each bar is one year of property sales, divided by type: homes, apartments, commercial, land, other, and parcels not yet classified. The types add up to 100%. The gold dashed line shows the trend in the home share.",
           means: `Homes were ${pctp(lt.counts[0] / tot(lt) * 100)} of the ${fmt(tot(lt))} property sales in ${lt.year}. Commercial property was ${pctp(lt.counts[2] / tot(lt) * 100, 1)}, and land was ${pctp(lt.counts[3] / tot(lt) * 100, 1)}.`,
           chart: stack100(BT.map(b => (A.find(a => a.year === b.year) || {}).months < 12 ? b.year + "*" : String(b.year)), T.map((n, k) => ({
             name: n,
@@ -315,11 +325,16 @@
             values: BT.map(b => b.counts[k]),
             text: k >= 3 && k !== 4 ? C.ink : "#fff"
           })), {
-            aria: "Share of property sales by type each year"
-          }) + legend(T.map((n, k) => ({
+            aria: "Share of property sales by type each year, with a trend line for the home share",
+            trend: homeTrend
+          }) + legend([...T.map((n, k) => ({
             name: n,
             color: TC[k]
-          }))) + `<p class="dfFoot">* Year to date.</p>`,
+          })), {
+            name: "Trend (home share)",
+            color: C.gold,
+            dash: true
+          }]) + `<p class="dfFoot">* Year to date.</p>`,
           head: ["Year", ...T.map(t => t + " (sales, median price)")],
           rows: BT.map(b => [b.year, ...b.counts.map((c, k) => fmt(c) + (b.medians[k] ? ", " + usd(b.medians[k]) : ""))]),
           method: `Type comes from the land-use description in Metro's parcel file. "Not yet classified" means the parcel had no land-use description yet, which is common for new construction. Apartment and commercial medians can swing widely because there are few sales. ${M.rules}`,
@@ -367,7 +382,7 @@
           color: C.gold,
           dots: true
         }], {
-          min: 0,
+          min: 40,
           max: 160,
           yf: v => Math.round(v),
           aria: "Six-year index of home price, home sales, and share under $400,000"
